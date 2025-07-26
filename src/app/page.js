@@ -116,9 +116,9 @@ export default function LandingPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-green-50">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-green-50 ">
       {/* Header */}
-      <header className="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-50">
+      <header className="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-50 lg:px-5">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
@@ -151,7 +151,7 @@ export default function LandingPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 lg:py-32">
+      <section className="relative overflow-hidden py-20 lg:py-20 lg:pl-8 lg:pr-2">
         <div className="absolute inset-0 bg-gradient-to-r from-green-400/20 to-orange-400/20"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -229,7 +229,7 @@ export default function LandingPage() {
       </section>
 
       {/* Top Vendors Section */}
-      <section id="vendors" className="py-20 bg-gradient-to-br from-green-50 to-orange-50">
+      <section id="vendors" className="py-20 bg-gradient-to-br from-green-50 to-orange-50 lg:px-5">
         <div className="container mx-auto px-4">
           <div
             className={`text-center mb-16 transition-all duration-1000 ${isVisible.vendors ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
@@ -290,7 +290,7 @@ export default function LandingPage() {
       </section>
 
       {/* Fresh Deals Section */}
-      <section id="deals" className="py-20 bg-white">
+      <section id="deals" className="py-20 bg-white lg:px-5">
         <div className="container mx-auto px-4">
           <div
             className={`text-center mb-16 transition-all duration-1000 ${isVisible.deals ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
@@ -357,7 +357,7 @@ export default function LandingPage() {
               </span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Real stories from vendors and sellers who've transformed their business with BhajiConnect
+              Real stories from vendors and sellers who've transformed their business with SupplyEase
             </p>
           </div>
           <div className="relative max-w-4xl mx-auto">
@@ -421,7 +421,7 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">Ready to Transform Your Business?</h2>
           <p className="text-xl text-green-100 mb-8 max-w-3xl mx-auto">
-            Join thousands of vendors and sellers who are already growing their business with BhajiConnect
+            Join thousands of vendors and sellers who are already growing their business with SupplyEase
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-white text-green-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl">
@@ -443,7 +443,7 @@ export default function LandingPage() {
                 <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-orange-500 rounded-full flex items-center justify-center">
                   <ShoppingCart className="w-6 h-6 text-white" />
                 </div>
-                <span className="text-2xl font-bold">BhajiConnect</span>
+                <span className="text-2xl font-bold">SupplyEase</span>
               </div>
               <p className="text-gray-300 leading-relaxed">
                 Connecting local bhaji vendors with street food sellers across India. Fresh produce, fair prices,
@@ -515,7 +515,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="border-t border-gray-700 mt-12 pt-8 text-center">
-            <p className="text-gray-300">© 2024 BhajiConnect. All rights reserved. Made with ❤️ for Indian vendors.</p>
+            <p className="text-gray-300">© 2024 SupplyEase. All rights reserved. Made with ❤️ for Indian vendors.</p>
           </div>
         </div>
       </footer>
