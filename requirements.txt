@@ -1,0 +1,19 @@
+# EaseSupply - Next.js Project Dependencies
+# Production Dependencies
+lucide-react==0.525.0
+next==15.4.4
+react==19.1.0
+react-dom==19.1.0
+
+# Development Dependencies
+@eslint/eslintrc==3.0.0
+@tailwindcss/postcss==4.0.0
+eslint==9.0.0
+eslint-config-next==15.4.4
+tailwindcss==4.0.0
+
+# Additional Recommended Packages (if needed)
+# @types/node==20.0.0
+# @types/react==18.0.0
+# @types/react-dom==18.0.0
+# typescript==5.0.0 
