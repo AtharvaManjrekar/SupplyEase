@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development node server.js",
-    "build": "next build"
+    "build": "next build",
     "start": "node server.js",
     "lint": "next lint"
   },
@@ -37,3 +37,4 @@
     "typescript": "^5.8.3"
   }
 }
+
