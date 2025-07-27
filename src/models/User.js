@@ -33,13 +33,11 @@ const userSchema = new mongoose.Schema({
   // Additional fields for your supply chain app
   role: {
     type: String,
-    enum: ['vendor', 'buyer', 'admin'],
-    default: 'buyer',
+    enum: ['vendor', 'distributor', 'admin'],
+    default: 'distributor',
+    required: true,
   },
   company: {
-    type: String,
-  },
-  phone: {
     type: String,
   },
   address: {
@@ -53,6 +51,16 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  location: {
+    type: {
+      type: String,
+      enum: ['Point'],
+      default: 'Point',
+    },
+    coordinates: {
+      type: [Number], // [lng, lat]
+    },
+  },
 });
 
 // Update the updatedAt field on save
@@ -63,4 +71,4 @@ userSchema.pre('save', function(next) {
 
 const User = mongoose.models.User || mongoose.model('User', userSchema);
 
-export default User; 
+export default User;

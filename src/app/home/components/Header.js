@@ -2,9 +2,20 @@
 import { UserButton, SignInButton, useUser } from '@clerk/nextjs';
 import Link from 'next/link';
 import { ShoppingCart } from 'lucide-react';
+import { useDispatch } from 'react-redux';
+import { clearUser } from '@/store/slices/userSlice';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
-  const { isSignedIn, user } = useUser();
+  const { isSignedIn, user, signOut } = useUser();
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await signOut();
+    dispatch(clearUser());
+    router.push('/home');
+  };
 
   return (
     <header className="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-green-100">
@@ -40,12 +51,18 @@ export default function Header() {
               </Link>
             )}
           </nav>
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-4">
             {isSignedIn ? (
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-4">
                 <span className="text-sm text-gray-700 font-medium">
                   Welcome, {user.firstName || user.emailAddresses[0].emailAddress}
                 </span>
+                <button 
+                  onClick={handleLogout}
+                  className="text-red-600 hover:text-red-700 hover:bg-red-50 px-4 py-2 rounded-full transition-colors font-medium"
+                >
+                  Logout
+                </button>
                 <UserButton 
                   appearance={{
                     elements: {
@@ -79,4 +96,4 @@ export default function Header() {
       </div>
     </header>
   );
-} 
+}

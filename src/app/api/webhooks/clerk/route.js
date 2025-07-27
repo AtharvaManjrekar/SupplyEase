@@ -13,13 +13,21 @@ export async function POST(req) {
 
   // If there are no headers, error out
   if (!svix_id || !svix_timestamp || !svix_signature) {
-    return new Response('Error occured -- no svix headers', {
+    console.error('Missing svix headers:', { svix_id, svix_timestamp, svix_signature });
+    return new Response('Missing webhook headers', {
       status: 400
     });
   }
 
   // Get the body
-  const payload = await req.json();
+  let payload;
+  try {
+    payload = await req.json();
+  } catch (err) {
+    console.error('Error parsing webhook body:', err);
+    return new Response('Invalid JSON payload', { status: 400 });
+  }
+  
   const body = JSON.stringify(payload);
 
   // Create a new Svix instance with your secret.
@@ -35,9 +43,12 @@ export async function POST(req) {
       "svix-signature": svix_signature,
     });
   } catch (err) {
-    console.error('Error verifying webhook:', err);
-    return new Response('Error occured', {
-      status: 400
+    console.error('Webhook verification failed:', err);
+    const errorMessage = err.code === 'INVALID_SIGNATURE' 
+      ? 'Invalid webhook signature'
+      : 'Webhook verification failed';
+    return new Response(errorMessage, {
+      status: 401
     });
   }
 
@@ -45,8 +56,7 @@ export async function POST(req) {
   const { id } = evt.data;
   const eventType = evt.type;
 
-  console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
-  console.log('Webhook body:', body);
+  console.log(`Processing webhook: ID=${id}, type=${eventType}`);
 
   // Handle the webhook
   if (eventType === 'user.created') {
@@ -57,11 +67,18 @@ export async function POST(req) {
       const primaryEmail = email_addresses.find(email => email.id === evt.data.primary_email_address_id);
       
       if (!primaryEmail) {
-        throw new Error('Primary email not found');
+        console.error('Primary email not found for user:', clerkId);
+        return new Response('Primary email not found', { status: 400 });
       }
 
       // Check if user already exists
-      const existingUser = await User.findOne({ clerkId });
+      const existingUser = await User.findOne({ 
+        $or: [
+          { clerkId },
+          { email: primaryEmail.email_address }
+        ]
+      });
+
       if (existingUser) {
         console.log('User already exists:', clerkId);
         return new Response('User already exists', { status: 200 });
@@ -79,9 +96,15 @@ export async function POST(req) {
       await newUser.save();
       console.log('User created successfully:', clerkId);
       
-      return new Response('User created successfully', { status: 200 });
+      return new Response('User created successfully', { status: 201 });
     } catch (error) {
       console.error('Error creating user:', error);
+      if (error.name === 'ValidationError') {
+        return new Response('Invalid user data: ' + error.message, { status: 400 });
+      }
+      if (error.code === 11000) {
+        return new Response('User already exists', { status: 409 });
+      }
       return new Response('Error creating user', { status: 500 });
     }
   }
@@ -94,10 +117,10 @@ export async function POST(req) {
       const primaryEmail = email_addresses.find(email => email.id === evt.data.primary_email_address_id);
       
       if (!primaryEmail) {
-        throw new Error('Primary email not found');
+        console.error('Primary email not found for update:', clerkId);
+        return new Response('Primary email not found', { status: 400 });
       }
 
-      // Update existing user
       const updatedUser = await User.findOneAndUpdate(
         { clerkId },
         {
@@ -107,7 +130,7 @@ export async function POST(req) {
           imageUrl: image_url,
           updatedAt: Date.now(),
         },
-        { new: true }
+        { new: true, runValidators: true }
       );
 
       if (!updatedUser) {
@@ -119,6 +142,9 @@ export async function POST(req) {
       return new Response('User updated successfully', { status: 200 });
     } catch (error) {
       console.error('Error updating user:', error);
+      if (error.name === 'ValidationError') {
+        return new Response('Invalid update data: ' + error.message, { status: 400 });
+      }
       return new Response('Error updating user', { status: 500 });
     }
   }
@@ -129,7 +155,6 @@ export async function POST(req) {
       
       const { id: clerkId } = evt.data;
       
-      // Delete user from database
       const deletedUser = await User.findOneAndDelete({ clerkId });
       
       if (!deletedUser) {
@@ -145,5 +170,7 @@ export async function POST(req) {
     }
   }
 
+  // Handle unrecognized event types
+  console.log('Unhandled webhook event type:', eventType);
   return new Response('Webhook received', { status: 200 });
-} 
+}
