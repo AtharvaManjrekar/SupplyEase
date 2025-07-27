@@ -2,13 +2,21 @@
   "name": "easesupply",
   "version": "0.1.0",
   "private": true,
+  "description": "Supply chain management platform with real-time tracking",
+  "author": "Your Name",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "rm -rf .next && next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "next lint --fix",
     "server": "cross-env NODE_ENV=development node server.js",
-    "server:prod": "cross-env NODE_ENV=production node server.js"
+    "server:prod": "cross-env NODE_ENV=production node server.js",
+    "vercel-build": "npm ci && rm -rf .next && next build",
+    "clean": "rm -rf .next node_modules/.cache",
+    "type-check": "tsc --noEmit",
+    "analyze": "cross-env ANALYZE=true next build"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.27.1",
@@ -25,21 +33,61 @@
     "react-redux": "^9.2.0",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
-    "svix": "^1.69.0"
+    "svix": "^1.69.0",
+    "clsx": "^2.1.1",
+    "class-variance-authority": "^0.7.1",
+    "date-fns": "^3.6.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.0.0",
     "@tailwindcss/postcss": "^4.0.0",
     "@types/node": "^24.1.0",
     "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.2",
+    "@types/leaflet": "^1.9.12",
     "cross-env": "^10.0.0",
     "eslint": "^9.0.0",
     "eslint-config-next": "15.4.4",
     "tailwindcss": "^4.0.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "lightningcss": "^1.27.0",
+    "@parcel/watcher": "^2.4.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "@next/bundle-analyzer": "^15.4.4"
   },
   "engines": {
-    "node": ">=18.0.0",
+    "node": "18.20.0",
     "npm": ">=8.0.0"
-  }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/easesupply.git"
+  },
+  "keywords": [
+    "supply-chain",
+    "logistics",
+    "tracking",
+    "nextjs",
+    "react",
+    "mongodb",
+    "real-time"
+  ],
+  "bugs": {
+    "url": "https://github.com/yourusername/easesupply/issues"
+  },
+  "homepage": "https://easesupply.vercel.app"
 }
