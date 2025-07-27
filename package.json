@@ -18,18 +18,12 @@
     "next": "15.4.4",
     "nodemon": "^3.1.10",
     "react": "19.1.0",
-<<<<<<< HEAD
-    "react-countup": "^6.5.3",
-    "react-dom": "19.1.0",
-    "react-intersection-observer": "^9.16.0"
-=======
     "react-dom": "19.1.0",
     "react-leaflet": "^5.0.0",
     "react-redux": "^9.2.0",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
     "svix": "^1.69.0"
->>>>>>> 72a38c6dd5cfe5d9b86d79ed9b823e70f65ab404
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
