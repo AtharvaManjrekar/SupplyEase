@@ -1,17 +1,15 @@
 import mongoose from 'mongoose';
 
-const UserSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   clerkId: {
     type: String,
     required: true,
     unique: true,
-    index: true,
   },
   email: {
     type: String,
     required: true,
     unique: true,
-    index: true,
   },
   firstName: {
     type: String,
@@ -21,10 +19,8 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  role: {
+  imageUrl: {
     type: String,
-    enum: ['vendor', 'distributor', null],
-    default: null,
   },
   createdAt: {
     type: Date,
@@ -34,9 +30,45 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-}, {
-  timestamps: true,
+  // Additional fields for your supply chain app
+  role: {
+    type: String,
+    enum: ['vendor', 'distributor', 'admin'],
+    default: 'distributor',
+    required: true,
+  },
+  company: {
+    type: String,
+  },
+  address: {
+    street: String,
+    city: String,
+    state: String,
+    zipCode: String,
+    country: String,
+  },
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
+  location: {
+    type: {
+      type: String,
+      enum: ['Point'],
+      default: 'Point',
+    },
+    coordinates: {
+      type: [Number], // [lng, lat]
+    },
+  },
 });
 
-// Prevent mongoose from creating the model multiple times
-export default mongoose.models.User || mongoose.model('User', UserSchema); 
+// Update the updatedAt field on save
+userSchema.pre('save', function(next) {
+  this.updatedAt = Date.now();
+  next();
+});
+
+const User = mongoose.models.User || mongoose.model('User', userSchema);
+
+export default User;

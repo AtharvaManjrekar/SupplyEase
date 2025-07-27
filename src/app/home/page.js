@@ -3,14 +3,14 @@
 import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight, Star, Users, ShoppingCart, Truck, Heart, MapPin, Clock, Phone } from "lucide-react"
 import Image from "next/image"
-import Header from "../components/Header";
-import HeroSection from "../components/HeroSection";
-import StatsSection from "../components/StatsSection";
-import TopVendorsSection from "../components/TopVendorsSection";
-import FreshDealsSection from "../components/FreshDealsSection";
-import TestimonialsSection from "../components/TestimonialsSection";
-import CTASection from "../components/CTASection";
-import Footer from "../components/Footer";
+import Header from "./components/Header";
+import HeroSection from "./components/HeroSection";
+import StatsSection from "./components/StatsSection";
+import TopVendorsSection from "./components/TopVendorsSection";
+import FreshDealsSection from "./components/FreshDealsSection";
+import TestimonialsSection from "./components/TestimonialsSection";
+import CTASection from "./components/CTASection";
+import Footer from "./components/Footer";
 
 export default function HomePage() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
