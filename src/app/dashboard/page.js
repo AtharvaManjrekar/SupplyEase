@@ -5,6 +5,9 @@ import { useEffect, useState } from 'react';
 import { redirect } from 'next/navigation';
 import { ShoppingCart, Users, Truck, Star, User, Database, Settings, Package, MapPin, Store } from 'lucide-react';
 import Header from '../home/components/Header';
+import StatsSection from '../home/components/StatsSection';
+import CTASection from '../home/components/CTASection';
+import Footer from '../home/components/Footer';
 
 // New: Sidebar and Panel Components
 import Sidebar from './components/Sidebar';
@@ -61,14 +64,14 @@ export default function Dashboard() {
   // Role-based panel options
   const role = userData?.role;
   const panels = [
-    { key: 'profile', label: 'Profile', icon: User },
-    ...(role === 'vendor' ? [{ key: 'productsNearby', label: 'Products Nearby', icon: MapPin }] : []),
-    ...(role === 'distributor' ? [{ key: 'sellProducts', label: 'Sell Products', icon: Store }] : []),
-    { key: 'orders', label: 'Orders', icon: Package },
-    { key: 'settings', label: 'Settings', icon: Settings },
+    { key: 'profile', label: 'Profile', icon: User, color: 'bg-gray-200 hover:bg-gray-300' },
+    ...(role === 'vendor' ? [{ key: 'productsNearby', label: 'Products Nearby', icon: MapPin, color: 'bg-gray-200 hover:bg-gray-300' }] : []),
+    ...(role === 'distributor' ? [{ key: 'sellProducts', label: 'Sell Products', icon: Store, color: 'bg-gray-200 hover:bg-gray-300' }] : []),
+    { key: 'orders', label: 'Orders', icon: Package, color: 'bg-gray-200 hover:bg-gray-300' },
+    { key: 'settings', label: 'Settings', icon: Settings, color: 'bg-gray-200 hover:bg-gray-300' },
   ];
 
-  // Panel rendering
+  // Updated panel rendering with card-based layout
   let panelContent = null;
   if (selectedPanel === 'profile') {
     panelContent = <ProfilePanel user={user} userData={userData} />;
@@ -83,20 +86,19 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-green-50">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-50">
       <Header />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex gap-8">
           {/* Sidebar */}
           <Sidebar panels={panels} selectedPanel={selectedPanel} setSelectedPanel={setSelectedPanel} />
           {/* Main Panel */}
-          <div className="flex-1">{panelContent}</div>
+          <div className="flex-1 bg-white rounded-lg shadow-md p-6 border border-gray-200 transition-transform duration-300 ease-in-out">
+            {panelContent}
+          </div>
         </div>
       </div>
-      {/* Background decorative elements */}
-      <div className="fixed top-20 left-20 w-32 h-32 bg-gradient-to-r from-green-400/10 to-orange-400/10 rounded-full animate-pulse pointer-events-none"></div>
-      <div className="fixed bottom-20 right-20 w-24 h-24 bg-gradient-to-r from-orange-400/10 to-red-400/10 rounded-full animate-pulse delay-1000 pointer-events-none"></div>
-      <div className="fixed top-1/2 left-10 w-16 h-16 bg-gradient-to-r from-green-300/10 to-blue-300/10 rounded-full animate-pulse delay-500 pointer-events-none"></div>
+      <Footer />
     </div>
   );
 }

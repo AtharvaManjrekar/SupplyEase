@@ -33,18 +33,6 @@ export default function Header() {
             <Link href="/home" className="text-gray-700 hover:text-green-600 transition-colors font-medium">
               Home
             </Link>
-            <Link href="/products" className="text-gray-700 hover:text-green-600 transition-colors font-medium">
-              Products
-            </Link>
-            <Link href="/vendors" className="text-gray-700 hover:text-green-600 transition-colors font-medium">
-              Vendors
-            </Link>
-            <Link href="/about" className="text-gray-700 hover:text-green-600 transition-colors font-medium">
-              About
-            </Link>
-            <Link href="/contact" className="text-gray-700 hover:text-green-600 transition-colors font-medium">
-              Contact
-            </Link>
             {isSignedIn && (
               <Link href="/dashboard" className="text-gray-700 hover:text-green-600 transition-colors font-medium">
                 Dashboard
@@ -57,12 +45,12 @@ export default function Header() {
                 <span className="text-sm text-gray-700 font-medium">
                   Welcome, {user.firstName || user.emailAddresses[0].emailAddress}
                 </span>
-                <button 
+                {/* <button 
                   onClick={handleLogout}
                   className="text-red-600 hover:text-red-700 hover:bg-red-50 px-4 py-2 rounded-full transition-colors font-medium"
                 >
                   Logout
-                </button>
+                </button> */}
                 <UserButton 
                   appearance={{
                     elements: {

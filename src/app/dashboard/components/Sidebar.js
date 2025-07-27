@@ -14,7 +14,7 @@ export default function Sidebar({ panels, selectedPanel, setSelectedPanel }) {
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-left transition-all duration-200 group
                 ${selectedPanel === key
                   ? 'bg-gradient-to-r from-green-400 to-green-600 text-black shadow-lg scale-[1.03] border-l-4 border-green-700'
-                  : 'hover:bg-green-50 text-black border-l-4 border-transparent'}
+                  : 'text-black border-l-4 bg-transparent border-transparent'}
               `}
               style={{marginTop: idx === 0 ? 0 : 6}}
               onClick={() => setSelectedPanel(key)}
@@ -24,13 +24,8 @@ export default function Sidebar({ panels, selectedPanel, setSelectedPanel }) {
             </button>
           </div>
         ))}
-        <li>
-          <a href="/dashboard/orders" className="block px-4 py-2 rounded hover:bg-green-100 text-green-800 font-semibold transition-all">
-            Orders
-          </a>
-        </li>
       </nav>
       {/* Footer or version info can go here if needed */}
     </aside>
   );
-} 
+}

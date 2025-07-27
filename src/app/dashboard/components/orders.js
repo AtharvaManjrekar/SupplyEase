@@ -21,8 +21,9 @@ export default function OrdersPage({ userData, role }) {
     try {
       const param = role === 'distributor' ? 'seller' : 'buyer';
       const res = await fetch(`/api/orders?${param}=${userData._id}`);
+if (!res.ok) throw new Error('Failed to fetch orders');
       const data = await res.json();
-      if (!res || !Array.isArray(data)) throw new Error(data.error || 'Failed to fetch orders');
+      if (!Array.isArray(data)) throw new Error(data.error || 'Invalid orders data');
       setOrders(data);
     } catch (err) {
       setError(err.message);

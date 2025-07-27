@@ -24,3 +24,18 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Add consistent button styling */
+button {
+  background: linear-gradient(to right, var(--color-green-500), var(--color-orange-500));
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 0.5rem 1rem;
+  font-weight: var(--font-weight-medium);
+  transition: background-color var(--default-transition-duration) var(--default-transition-timing-function);
+}
+
+button:hover {
+  background: linear-gradient(to right, var(--color-green-600), var(--color-orange-600));
+}
