@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development node server.js",
-    "build": "next build",
+    "build": "cross-env NODE_ENV=production node server.js",
     "start": "node server.js",
     "lint": "next lint"
   },
@@ -26,14 +26,14 @@
     "svix": "^1.69.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.0.0",
-    "@tailwindcss/postcss": "^4.0.0",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^24.1.0",
     "@types/react": "^19.1.8",
     "cross-env": "^10.0.0",
-    "eslint": "^9.0.0",
+    "eslint": "^9",
     "eslint-config-next": "15.4.4",
-    "tailwindcss": "^4.0.0",
+    "tailwindcss": "^4",
     "typescript": "^5.8.3"
   }
 }
