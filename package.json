@@ -3,17 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "description": "Supply chain management platform with real-time tracking",
-  "author": "Your Name",
+  "author": "Atharva Manjrekar",
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
-    "build": "rm -rf .next && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "server": "cross-env NODE_ENV=development node server.js",
     "server:prod": "cross-env NODE_ENV=production node server.js",
-    "vercel-build": "npm ci && rm -rf .next && next build",
     "clean": "rm -rf .next node_modules/.cache",
     "type-check": "tsc --noEmit",
     "analyze": "cross-env ANALYZE=true next build"
@@ -21,6 +20,9 @@
   "dependencies": {
     "@clerk/nextjs": "^6.27.1",
     "@reduxjs/toolkit": "^2.8.2",
+    "clsx": "^2.1.1",
+    "class-variance-authority": "^0.7.1",
+    "date-fns": "^3.6.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.526.0",
     "mongodb": "^6.18.0",
@@ -34,30 +36,27 @@
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
     "svix": "^1.69.0",
-    "clsx": "^2.1.1",
-    "class-variance-authority": "^0.7.1",
-    "date-fns": "^3.6.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.0.0",
-    "@types/node": "^24.1.0",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.2",
+    "@next/bundle-analyzer": "^15.4.4",
+    "@parcel/watcher": "^2.4.1",
     "@types/leaflet": "^1.9.12",
+    "@types/node": "^20.11.30",
+    "@types/react": "^19.0.23",
+    "@types/react-dom": "^19.0.12",
+    "autoprefixer": "^10.4.20",
     "cross-env": "^10.0.0",
     "eslint": "^9.0.0",
     "eslint-config-next": "15.4.4",
-    "tailwindcss": "^3.4.14",
-    "typescript": "^5.8.3",
     "lightningcss": "^1.27.0",
-    "@parcel/watcher": "^2.4.1",
-    "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
-    "@next/bundle-analyzer": "^15.4.4"
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.8.3"
   },
   "engines": {
-    "node": "22.x",
+    "node": "20.x",
     "npm": ">=8.0.0"
   },
   "browserslist": {
@@ -74,7 +73,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/easesupply.git"
+    "url": "https://github.com/AtharvaManjrekar/SupplyEase.git"
   },
   "keywords": [
     "supply-chain",
@@ -86,7 +85,7 @@
     "real-time"
   ],
   "bugs": {
-    "url": "https://github.com/yourusername/easesupply/issues"
+    "url": "https://github.com/AtharvaManjrekar/SupplyEase/issues"
   },
-  "homepage": "https://easesupply.vercel.app"
+  "homepage": "https://supplyease.vercel.app"
 }
